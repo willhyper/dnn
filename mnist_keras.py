@@ -36,6 +36,7 @@ yc_test = to_categorical(y_test, 10)
 # Choose your architecture as you please
 model = Sequential()
 model.add(Dense(20, input_dim = 784, activation = 'relu'))
+model.add(Dropout(0.2))
 model.add(Dense(10, activation = 'softmax'))
 model.summary()
 
@@ -48,12 +49,14 @@ model.compile(optimizer='rmsprop',
               metrics=['accuracy'])
 
 # Exercise 6:
-model.fit(X_train, yc_train, validation_split = 0.3)
+model.fit(X_train, yc_train, validation_split = 0.3, 
+        epochs=3, batch_size=128, verbose=0)
 
 
 # Exercise 7:
-model.evaluate(X_test, yc_test)
-
+loss, acc = model.evaluate(X_test, yc_test)
+print('loss', loss)
+print('accuracy', acc)
 
 # Bonus Exercise:
 # Modify the code to use a Convolutional Neural Network
