@@ -1,5 +1,5 @@
 # dnn
-Learn dnn step by step
+simplify objective to bare minimum code.
 
 # install & test environment
 git clone https://github.com/willhyper/dnn.git
