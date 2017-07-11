@@ -1,5 +1,5 @@
-# dnn
-simplify objective to bare minimum code.
+# objective
+minimum code to the point
 
 # install & test environment
 git clone https://github.com/willhyper/dnn.git
