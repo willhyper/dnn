@@ -30,8 +30,7 @@ print('yc_train.shape', yc_train.shape)
 print('yc_test.shape', yc_test.shape)
 
 model = Sequential()
-model.add(Dense(20, input_dim=28*28, activation='relu'))
-model.add(Dense(10, activation='softmax'))
+model.add(Dense(10, input_dim=28*28, activation='softmax'))
 model.summary()
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
