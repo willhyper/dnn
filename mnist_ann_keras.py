@@ -11,6 +11,7 @@ from keras.layers import Dense
 from keras.models import Sequential
 from keras.utils import to_categorical
 import numpy as np
+import time
 
 class Codec:
     def enc(self, x): return to_categorical(x, 10)
@@ -29,17 +30,23 @@ print('yc_train.shape', yc_train.shape)
 print('yc_test.shape', yc_test.shape)
 
 model = Sequential()
-model.add(Dense(10, input_dim=784, activation='softmax'))
+model.add(Dense(20, input_dim=28*28, activation='relu'))
+model.add(Dense(10, activation='softmax'))
 model.summary()
 
 model.compile(optimizer='adam', loss='categorical_crossentropy', metrics=['accuracy'])
 
+start = time.time()
 while True:
-    model.fit(X_train, yc_train, epochs=1, verbose=0)
-    loss, acc = model.evaluate(X_test, yc_test)
-    if acc > 0.92: break
+    hist = model.fit(X_train, yc_train, epochs=1, verbose=1)
+    acc_of_last_epoch = hist.history['acc'][-1]
+    if acc_of_last_epoch > 0.92: break
+elapse = time.time() - start
 
-print('Accuracy %f is achieved' % acc)
+loss, acc = model.evaluate(X_test, yc_test, verbose=0)
+n_param = model.count_params()
+print('Accuracy', acc, 'elapsed sec', elapse, 'n_param', n_param)
+
 def view_sample():
     ind = np.random.randint(0, yc_test.shape[0])
     Xind = X_test[np.array([ind])]
