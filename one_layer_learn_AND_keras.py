@@ -14,7 +14,7 @@ from keras.layers import Dense
 import numpy as np
 
 X_train = np.array([[0, 0], [0, 1], [1, 0], [1, 1]])
-y_train = np.array([0, 0, 0, 1]).T  # AND
+y_train = np.array([[0], [0], [0], [1]])  # AND
 
 model = Sequential()
 model.add(Dense(1, input_dim=2))
@@ -23,10 +23,10 @@ model.summary()
 model.compile(optimizer='adam',loss='mean_squared_error',metrics=['accuracy'])
 
 while True:
-    model.fit(X_train, y_train, epochs=1, verbose=0)
-    loss, acc = model.evaluate(X_train, y_train, verbose=0)
-    if acc == 1.0: break
+    hist = model.fit(X_train, y_train, epochs=1, verbose=0)
+    acc_of_last_epoch = hist.history['acc'][-1]
+    if acc_of_last_epoch == 1.0: break
 
-y_pred_class = model.predict_classes(X_train)[:, 0] # [0] = best guess
+y_pred_class = model.predict_classes(X_train)
 assert all(y_pred_class == y_train)
 print('learned AND.')
