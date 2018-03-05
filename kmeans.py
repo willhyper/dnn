@@ -1,7 +1,6 @@
 # Example with a richer dataset.
 # See: https://www.datascience.com/blog/introduction-to-k-means-clustering-algorithm-learn-data-science-tutorials
 
-
 from pprint import pprint
 from math import fsum, sqrt
 from collections import defaultdict
@@ -30,17 +29,17 @@ def compute_centroids(groups):
     return [tuple(map(mean, transpose(g))) for g in groups]
 
 
-def kmeans(data, k, iterations=10):
+def kmeans(data, k, iterations=100): # with assumption that centroids converge
     centroids = sample(data,k)
     for _ in range(iterations):
         labeled = assign_data(centroids, data)
         centroids = compute_centroids(labeled.values())
-        #pprint(centroids)
     return centroids
 
 if __name__ == '__main__':
 
-    # Simple example with six 3-D points clustered into two groups'
+    print('Simple example with six 3-D points clustered into two groups')
+    
     points = [
             (10, 41, 23),
             (22, 30, 29),
@@ -51,7 +50,9 @@ if __name__ == '__main__':
             ]
 
     centroids = kmeans(points, k=2)
-    print(centroids)
+    
+    pprint(points)
+    print('centroids',centroids)
 
     # data = [
     #          (10, 30),
