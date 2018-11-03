@@ -4,9 +4,7 @@ minimum code to the point
 # install & test environment
 git clone https://github.com/willhyper/dnn.git
 
-conda env create -n nn -f env.yml 
+pipenv install
 
-. activate nn
-
-python line_fit_keras.py
+pipenv run python line_fit_keras.py
 
